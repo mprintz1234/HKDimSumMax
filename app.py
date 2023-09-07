@@ -1,5 +1,7 @@
 from flask import Flask
+from flask import request
 from modules.TestQuestion import TestQuestion
+from modules.CalendarScheduling import CalendarScheduling
 
 app = Flask(__name__)
 
@@ -10,3 +12,10 @@ def hello_world():
 @app.route('/test')
 def test():
     return TestQuestion().answer()
+
+@app.route('/calendar-scheduling', methods = ['POST'])
+def calendarScheduling():
+    cs = CalendarScheduling()
+    print(request.get_json())
+    data = request.get_json()
+    return cs.answer(data)
