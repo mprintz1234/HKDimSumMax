@@ -74,7 +74,6 @@ class CalendarScheduling():
                 dp.append(tmp)
             
 
-        print(dp[-1])
         maxValue = 0
         res = {}
         for ans in dp[-1]:
@@ -85,5 +84,5 @@ class CalendarScheduling():
         for k in res.keys():
             if len(res[k]) > 0:
                 out[k] = res[k]
-
+        print(maxValue)
         return out
