@@ -11,11 +11,13 @@ def hello_world():
 
 @app.route('/test')
 def test():
-    return TestQuestion().answer()
+    return CalendarScheduling().get_input()
 
 @app.route('/calendar-scheduling', methods = ['POST'])
 def calendarScheduling():
     cs = CalendarScheduling()
     data = request.get_json()
+    cs.set_input(input_str)
     print(len(data))
     return cs.answer(data)
+
