@@ -85,6 +85,7 @@ class CalendarScheduling():
                 for t in tmp:
                     if t["value"] == maxVal:
                         newTmp.append(t)
+                del dp
                 dp = [newTmp]
             
 
