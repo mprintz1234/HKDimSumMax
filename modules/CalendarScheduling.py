@@ -70,7 +70,7 @@ class CalendarScheduling():
                     availableTime = option["availability"][day]
                     if availableTime - currObj["duration"] >= 0:
                         if option["value"] + p[0] >= maxVal:
-                            maxVal = option["value"]
+                            maxVal = option["value"] + p[0]
                             newOption = json.loads(json.dumps(option))
                             newOption["availability"][day] = availableTime - currObj["duration"]
                             newOption["value"] += p[0]
