@@ -79,6 +79,7 @@ class CalendarScheduling():
         for ans in dp[-1]:
             if ans["value"] > maxValue:
                 res = ans["res"]
+            maxValue = ans["value"]
         
         out = {}
         for k in res.keys():

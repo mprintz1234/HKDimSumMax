@@ -16,6 +16,5 @@ def test():
 @app.route('/calendar-scheduling', methods = ['POST'])
 def calendarScheduling():
     cs = CalendarScheduling()
-    print(request.get_json())
     data = request.get_json()
     return cs.answer(data)
