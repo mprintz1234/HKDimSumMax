@@ -23,6 +23,12 @@ import copy
 #     "AvailableDays": ["friday"]
 # }]
 
+def fast_copy(d):
+    output = d.copy()
+    for key, value in output.items():
+        output[key] = fast_copy(value) if isinstance(value, dict) else value        
+    return output
+
 class CalendarScheduling():
 
     def answer(self, data):
@@ -54,14 +60,13 @@ class CalendarScheduling():
             pq.append((d["duration"]*d["potentialEarnings"], d["lessonRequestId"]))
             datamap[d["lessonRequestId"]] = d
 
-        for p in pq:
+        for p in sorted(pq, reverse=True):
             tmp = []
             maxVal = 0
-
             currObj = datamap[p[1]]
             for day in currObj["availableDays"]:
                 for option in dp[-1]:
-                    newOption = option.copy
+                    newOption = copy.deepcopy(option)
                     availableTime = option["availability"][day]
                     if availableTime - currObj["duration"] >= 0:
                         newOption["availability"][day] = availableTime - currObj["duration"]
@@ -70,15 +75,16 @@ class CalendarScheduling():
                         tmp.append(newOption)
                         if newOption["value"] > maxVal:
                             maxVal = newOption["value"]
-            
+
+                        
             if len(tmp) == 0:
-                break
+                continue
             else:
                 newTmp = []
                 for t in tmp:
                     if t["value"] == maxVal:
                         newTmp.append(t)
-                dp.append(newTmp)
+                dp = [newTmp]
             
 
         maxValue = 0
