@@ -31,12 +31,12 @@ def fast_copy(d):
 
 class CalendarScheduling():
     input_str = ""
-    
+
     def set_input(self, inp):
         self.input_str = inp
 
     def get_input(self):
-        return input_str
+        return self.input_str
 
     def answer(self, data):
         pq = []
