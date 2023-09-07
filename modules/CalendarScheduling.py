@@ -56,6 +56,7 @@ class CalendarScheduling():
 
         for p in pq:
             tmp = []
+            maxVal = 0
 
             currObj = datamap[p[1]]
             for day in currObj["availableDays"]:
@@ -67,11 +68,17 @@ class CalendarScheduling():
                         newOption["value"] += p[0]
                         newOption["res"][day].append(p[1])
                         tmp.append(newOption)
+                        if newOption["value"] > maxVal:
+                            maxVal = newOption["value"]
             
             if len(tmp) == 0:
                 break
             else:
-                dp.append(tmp)
+                newTmp = []
+                for t in tmp:
+                    if t["value"] == maxVal:
+                        newTmp.append(t)
+                dp.append(newTmp)
             
 
         maxValue = 0
