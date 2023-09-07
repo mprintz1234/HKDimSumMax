@@ -67,15 +67,15 @@ class CalendarScheduling():
             for day in currObj["availableDays"]:
                 for option in dp[-1]:
                     # newOption = copy.deepcopy(option)
-                    newOption = json.loads(json.dumps(option))
                     availableTime = option["availability"][day]
                     if availableTime - currObj["duration"] >= 0:
-                        newOption["availability"][day] = availableTime - currObj["duration"]
-                        newOption["value"] += p[0]
-                        newOption["res"][day].append(p[1])
-                        tmp.append(newOption)
-                        if newOption["value"] > maxVal:
+                        if option["value"] + p[0] > maxVal:
                             maxVal = newOption["value"]
+                            newOption = json.loads(json.dumps(option))
+                            newOption["availability"][day] = availableTime - currObj["duration"]
+                            newOption["value"] += p[0]
+                            newOption["res"][day].append(p[1])
+                            tmp.append(newOption)
 
                         
             if len(tmp) == 0:
