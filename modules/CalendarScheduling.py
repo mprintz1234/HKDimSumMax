@@ -1,5 +1,6 @@
 import copy
 import json
+from data import testdata
 
 # data = [{
 #     "lessonRequestId": "LR1",
@@ -42,7 +43,7 @@ class CalendarScheduling():
     def answer(self, data):
         pq = []
         datamap = {}
-        dp = [[{"value": 0, 
+        dp = [{"value": 0, 
         "res": {
             "monday": [],
             "tuesday": [],
@@ -61,54 +62,77 @@ class CalendarScheduling():
             "saturday": 12,
             "sunday": 12,
         }
-        }]]
+        }]
 
 
         for d in data:
-            pq.append((d["duration"]*d["potentialEarnings"], d["lessonRequestId"]))
-            datamap[d["lessonRequestId"]] = d
-
-        for p in sorted(pq, reverse=True):
-            tmp = []
-            maxVal = 0
-            currObj = datamap[p[1]]
-            for day in currObj["availableDays"]:
-                for option in dp[-1]:
-                    # newOption = copy.deepcopy(option)
-                    availableTime = option["availability"][day]
-                    if availableTime - currObj["duration"] >= 0:
-                        if option["value"] + p[0] >= maxVal:
-                            maxVal = option["value"] + p[0]
-
-                for option in dp[-1]:
-                    if option["value"] + p[0] == maxVal:
-                        newOption = json.loads(json.dumps(option))
-                        newOption["availability"][day] = availableTime - currObj["duration"]
-                        newOption["value"] += p[0]
-                        newOption["res"][day].append(p[1])
-                        tmp.append(newOption)
-                        
-            if len(tmp) == 0:
+            if d["potentialEarnings"] == 0:
                 continue
-            else:
-                newTmp = []
-                for t in tmp:
-                    if t["value"] == maxVal:
-                        newTmp.append(t)
-                del dp
-                dp = [newTmp]
-            
+            pq.append((d["potentialEarnings"]/d["duration"], -1*d["duration"], d["lessonRequestId"]))
+            datamap[d["lessonRequestId"]] = d
+        
+        
+        for p in sorted(pq, reverse=True):
+            # tmp = []
+            maxVal = 0
+            currObj = datamap[p[2]]
+            inserted = False
 
-        maxValue = 0
-        res = {}
-        for ans in dp[-1]:
-            if ans["value"] > maxValue:
-                res = ans["res"]
-            maxValue = ans["value"]
+            for day in currObj["availableDays"]:
+                availableTime = dp[-1]["availability"][day]
+                if availableTime - currObj["duration"] >= 0:
+                    # newOption = json.loads(json.dumps(dp[-1]))
+                    dp[-1]["availability"][day] = availableTime - currObj["duration"]
+                    dp[-1]["value"] += p[0]
+                    dp[-1]["res"][day].append(p[2])
         
         out = {}
-        for k in res.keys():
-            if len(res[k]) > 0:
-                out[k] = res[k]
-        print(maxValue)
+        for k in dp[-1]["res"].keys():
+            if len(dp[-1]["res"][k]) > 0:
+                out[k] = dp[-1]["res"][k]
         return out
+
+
+            # for day in currObj["availableDays"]:
+            #     for option in dp[-1]:
+            #         # newOption = copy.deepcopy(option)
+            #         availableTime = option["availability"][day]
+            #         if availableTime - currObj["duration"] >= 0:
+            #             if option["value"] + p[0] >= maxVal:
+            #                 maxVal = option["value"] + p[0]
+
+            #     for option in dp[-1]:
+            #         if option["value"] + p[0] == maxVal:
+            #             newOption = json.loads(json.dumps(option))
+            #             newOption["availability"][day] = availableTime - currObj["duration"]
+            #             newOption["value"] += p[0]
+            #             newOption["res"][day].append(p[2])
+            #             tmp.append(newOption)
+                        
+            # if len(tmp) == 0:
+            #     continue
+            # else:
+            #     newTmp = []
+            #     for t in tmp:
+            #         if t["value"] == maxVal:
+            #             newTmp.append(t)
+            #     del dp
+            #     dp = [newTmp]
+            
+
+        # maxValue = 0
+        # res = {}
+        # for ans in dp[-1]:
+        #     if ans["value"] > maxValue:
+        #         res = ans["res"]
+        #     maxValue = ans["value"]
+        
+        # out = {}
+        # for k in res.keys():
+        #     if len(res[k]) > 0:
+        #         out[k] = res[k]
+        # print(maxValue)
+        # return out
+
+
+# print(CalendarScheduling().answer(testdata))
