@@ -30,7 +30,8 @@ def fast_copy(d):
     return output
 
 class CalendarScheduling():
-    input_str
+    input_str = ""
+    
     def set_input(self, inp):
         self.input_str = inp
 
