@@ -56,7 +56,7 @@ class CalendarScheduling():
             tmp = []
 
             currObj = self.datamap[p[1]]
-            for day in currObj["AvailableDays"]:
+            for day in currObj["availableDays"]:
                 for option in self.dp[-1]:
                     newOption = copy.deepcopy(option)
                     availableTime = option["availability"][day]
