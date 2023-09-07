@@ -20,5 +20,5 @@ def test():
 def calendarScheduling():
     data = request.get_json()
     cs.set_input(data)
-    #print(len(data))
-    #return cs.answer(data)
+    print(len(data))
+    return cs.answer(data)
