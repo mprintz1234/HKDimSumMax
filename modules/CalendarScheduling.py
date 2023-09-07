@@ -33,6 +33,7 @@ class CalendarScheduling():
     input_str = ""
 
     def set_input(self, inp):
+        print("setting")
         self.input_str = inp
 
     def get_input(self):
