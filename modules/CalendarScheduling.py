@@ -24,40 +24,42 @@ import copy
 # }]
 
 class CalendarScheduling():
-    pq = []
-    datamap = {}
-    dp = [[{"value": 0, 
-    "res": {
-        "monday": [],
-        "tuesday": [],
-        "wednesday": [],
-        "thursday": [],
-        "friday": [],
-        "saturday": [],
-        "sunday": [],
-    },
-    "availability": {
-        "monday": 12,
-        "tuesday": 12,
-        "wednesday": 12,
-        "thursday": 12,
-        "friday": 12,
-        "saturday": 12,
-        "sunday": 12,
-    }
-    }]]
 
     def answer(self, data):
-        for d in data:
-            self.pq.append((d["duration"]*d["potentialEarnings"], d["lessonRequestId"]))
-            self.datamap[d["lessonRequestId"]] = d
+        pq = []
+        datamap = {}
+        dp = [[{"value": 0, 
+        "res": {
+            "monday": [],
+            "tuesday": [],
+            "wednesday": [],
+            "thursday": [],
+            "friday": [],
+            "saturday": [],
+            "sunday": [],
+        },
+        "availability": {
+            "monday": 12,
+            "tuesday": 12,
+            "wednesday": 12,
+            "thursday": 12,
+            "friday": 12,
+            "saturday": 12,
+            "sunday": 12,
+        }
+        }]]
 
-        for p in self.pq:
+
+        for d in data:
+            pq.append((d["duration"]*d["potentialEarnings"], d["lessonRequestId"]))
+            datamap[d["lessonRequestId"]] = d
+
+        for p in pq:
             tmp = []
 
-            currObj = self.datamap[p[1]]
+            currObj = datamap[p[1]]
             for day in currObj["availableDays"]:
-                for option in self.dp[-1]:
+                for option in dp[-1]:
                     newOption = copy.deepcopy(option)
                     availableTime = option["availability"][day]
                     if availableTime - currObj["duration"] >= 0:
@@ -69,13 +71,13 @@ class CalendarScheduling():
             if len(tmp) == 0:
                 break
             else:
-                self.dp.append(tmp)
+                dp.append(tmp)
             
 
-        print(self.dp[-1])
+        print(dp[-1])
         maxValue = 0
         res = {}
-        for ans in self.dp[-1]:
+        for ans in dp[-1]:
             if ans["value"] > maxValue:
                 res = ans["res"]
         
