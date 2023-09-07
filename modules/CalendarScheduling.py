@@ -61,7 +61,7 @@ class CalendarScheduling():
             currObj = datamap[p[1]]
             for day in currObj["availableDays"]:
                 for option in dp[-1]:
-                    newOption = copy.deepcopy(option)
+                    newOption = option.copy
                     availableTime = option["availability"][day]
                     if availableTime - currObj["duration"] >= 0:
                         newOption["availability"][day] = availableTime - currObj["duration"]
