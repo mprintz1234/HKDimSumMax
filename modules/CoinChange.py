@@ -12,6 +12,8 @@ class CoinChange():
 
         for testcase in data["inputs"]:
             n, s_coins = self.getNumAndCoins(testcase)
+            print("Attempting for case")
+            print(n, s_coins)
             dp = [[0 for _ in range(n+1)] for _ in range(len(s_coins)+1)]
             
             for num in range(1, len(s_coins)+1):
