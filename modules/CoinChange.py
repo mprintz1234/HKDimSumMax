@@ -17,12 +17,14 @@ class CoinChange():
             dp = [[0 for _ in range(n+1)] for _ in range(len(s_coins)+1)]
             
             for num in range(1, len(s_coins)+1):
-                dp[num][s_coins[num-1]] = 1
+                if s_coins[num-1] <= len(s_coins):
+                    dp[num][s_coins[num-1]] = 1
 
             for i in range(1, len(s_coins)+1):
                 for j in range(n+1):
                     total = dp[i][j]
-                    total += dp[i][j-s_coins[i-1]]
+                    if s_coins[i-1] <= len(s_coins):
+                        total += dp[i][j-s_coins[i-1]]
                     if i > 1:
                         total += dp[i-1][j]
 
@@ -42,6 +44,13 @@ class CoinChange():
 #             [
 #                 "206 4",
 #                 "2 20 9 30"
+#             ],
+#             [
+#                 "14 4",
+#                 "13 25 46 47"
 #             ]]
 # }
+
+# print(cc.answer(testdata))
+
 
