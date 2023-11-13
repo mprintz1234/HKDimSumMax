@@ -10,6 +10,8 @@ class CoinChange():
     def answer(self, data):
         ans = []
 
+        print(data)
+
         for testcase in data["inputs"]:
             n, s_coins = self.getNumAndCoins(testcase)
             print("Attempting for case")
