@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # global cs = CalendarScheduling()
 cs = CalendarScheduling()
-coinChange = CoinChange()
+coinChangeModule = CoinChange()
 
 @app.route('/')
 def hello_world():
@@ -36,4 +36,4 @@ def test():
 @app.route('/coin-change',  methods = ['POST'])
 def coinChange():
     data = request.get_json()
-    return coinChange.answer(data)
+    return coinChangeModule.answer(data)
