@@ -19,17 +19,19 @@ class CoinChange():
             try:
                 dp = [[0 for _ in range(n+1)] for _ in range(len(s_coins)+1)]
                 
-                for num in range(1, len(s_coins)+1):
-                    if s_coins[num-1] <= n:
-                        dp[num][s_coins[num-1]] = 1
+                # for num in range(1, len(s_coins)+1):
+                #     if s_coins[num-1] <= n:
+                #         dp[num][s_coins[num-1]] = 1
+
+                dp[0][0] = 1
 
                 for i in range(1, len(s_coins)+1):
                     for j in range(n+1):
                         total = dp[i][j]
                         if s_coins[i-1] <= n:
                             total += dp[i][j-s_coins[i-1]]
-                        if i > 1:
-                            total += dp[i-1][j]
+                        # if i > 1:
+                        total += dp[i-1][j]
 
                         dp[i][j] = total
 
