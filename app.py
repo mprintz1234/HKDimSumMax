@@ -4,6 +4,7 @@ from modules.TestQuestion import TestQuestion
 from modules.CalendarScheduling import CalendarScheduling
 from modules.CoinChange import CoinChange
 from modules.FileReorganization import FileReorganization
+from modules.TimeIntervals import TimeIntervals
 
 app = Flask(__name__)
 
@@ -11,6 +12,7 @@ app = Flask(__name__)
 cs = CalendarScheduling()
 coinChangeModule = CoinChange()
 fr = FileReorganization()
+ti = TimeIntervals()
 
 @app.route('/')
 def hello_world():
@@ -44,3 +46,8 @@ def coinChange():
 def FileReorganization():
     data = request.get_json()
     return fr.answer(data)
+
+@app.route('/time-intervals', methods = ['POST'])
+def TimeIntervals():
+    data = request.get_json()
+    return ti.answer(data)
