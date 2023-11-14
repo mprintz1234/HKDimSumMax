@@ -70,7 +70,7 @@ class TimeIntervals():
                     start_time = clock
 
                 clock += 1
-            res = [n] + res
+            res = [str(n)] + res
             ans.append(res)
 
         return {"answer": ans}
