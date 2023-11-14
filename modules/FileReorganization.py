@@ -29,7 +29,7 @@ class FileReorganization():
 
             ans.append(largest)
 
-        return ans
+        return {"answer": ans}
 
 
 # tc = {
