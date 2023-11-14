@@ -4,16 +4,21 @@ class TimeIntervals():
         emplLst = []
         for interval in lstOfIntervals:
             emplLst.append(interval[2])
-        return str(start) + " " + str(end) + " " + str(num) + " " + ' '.join(sorted(emplLst))
+
+        return_str = str(start) + " " + str(end) + " " + str(num)
+        if emplLst:
+            return return_str + " " + ' '.join(sorted(emplLst))
+        else:
+            return return_str
 
     def answer(self, data):
         
         ans = []
 
         for testcase in data["inputs"]:
-            res = [testcase[0]]
+            res = []
 
-            n = int(testcase[0])
+            n = 0
             employees = testcase[1].split()
             pq = []
 
@@ -61,9 +66,11 @@ class TimeIntervals():
                 if leave or join:
                     #res.append([start_time, clock, len(combined), combined])
                     res.append(self.getResStr(start_time, clock, len(combined), combined))
+                    n += 1
                     start_time = clock
 
                 clock += 1
+            res = [n] + res
             ans.append(res)
 
         return {"answer": ans}
