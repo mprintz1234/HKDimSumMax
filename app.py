@@ -9,6 +9,7 @@ app = Flask(__name__)
 # global cs = CalendarScheduling()
 cs = CalendarScheduling()
 coinChangeModule = CoinChange()
+fr = FileReorganization()
 
 @app.route('/')
 def hello_world():
@@ -37,3 +38,8 @@ def test():
 def coinChange():
     data = request.get_json()
     return coinChangeModule.answer(data)
+
+@app.route('/file-reorganization', methods = ['POST'])
+def FileReorganization():
+    data = request.get_json()
+    return fr.answer(data)
