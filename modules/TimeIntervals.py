@@ -60,8 +60,7 @@ class TimeIntervals():
 
                 if leave or join:
                     #res.append([start_time, clock, len(combined), combined])
-                    if len(combined) > 0:
-                        res.append(self.getResStr(start_time, clock, len(combined), combined))
+                    res.append(self.getResStr(start_time, clock, len(combined), combined))
                     start_time = clock
 
                 clock += 1
