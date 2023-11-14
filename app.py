@@ -3,6 +3,7 @@ from flask import request
 from modules.TestQuestion import TestQuestion
 from modules.CalendarScheduling import CalendarScheduling
 from modules.CoinChange import CoinChange
+from modules.FileReorganization import FileReorganization
 
 app = Flask(__name__)
 
