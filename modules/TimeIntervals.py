@@ -45,14 +45,12 @@ class TimeIntervals():
 
                     # any employee need to leave desk
                     while on_desk_q[key] and on_desk_q[key][0][1] == clock:
-                        print("user leaving", on_desk_q[key][0])
                         leave = True
                         on_desk_q[key].pop(0)
 
                 # add new employee to desk
                 while pq and pq[0][0] == clock:
                     join = True
-                    print("adding user", pq[0])
                     # enqueue users to desk
                     if pq[0][0]in on_desk_q:
                         on_desk_q[pq[0][0]].append(pq[0])
@@ -62,7 +60,8 @@ class TimeIntervals():
 
                 if leave or join:
                     #res.append([start_time, clock, len(combined), combined])
-                    res.append(self.getResStr(start_time, clock, len(combined), combined))
+                    if len(combined) > 0:
+                        res.append(self.getResStr(start_time, clock, len(combined), combined))
                     start_time = clock
 
                 clock += 1
@@ -70,20 +69,20 @@ class TimeIntervals():
 
         return {"answer": ans}
 
-tc = {
-    "inputs": [["5",
-        "Alice Bob Cacey Deepak Emma",
-        "10 14",
-        "11 12",
-        "10 15",
-        "12 16",
-        "14 16"],
-        ["3",
-        "Neil Angel Alok",
-        "1 10",
-        "7 9",
-        "7 10"]]
-}
+# tc = {
+#     "inputs": [["5",
+#         "Alice Bob Cacey Deepak Emma",
+#         "10 14",
+#         "11 12",
+#         "10 15",
+#         "12 16",
+#         "14 16"],
+#         ["3",
+#         "Neil Angel Alok",
+#         "1 10",
+#         "7 9",
+#         "7 10"]]
+# }
 
 
 # {
@@ -105,5 +104,5 @@ tc = {
 #     ],
 # }
 
-ti = TimeIntervals()
-print(ti.answer(tc))
+# ti = TimeIntervals()
+# print(ti.answer(tc))
