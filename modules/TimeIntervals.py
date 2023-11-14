@@ -6,6 +6,8 @@ class TimeIntervals():
             emplLst.append(interval[2])
 
         return_str = str(start) + " " + str(end) + " " + str(num)
+        return return_str + " " + ' '.join(sorted(emplLst))
+
         if emplLst:
             return return_str + " " + ' '.join(sorted(emplLst))
         else:
