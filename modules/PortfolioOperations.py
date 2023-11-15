@@ -44,13 +44,13 @@ class PortfolioOperations():
                         dp[s1_i][s2_i] = (dp[s1_i-1][s2_i][0] + s1[s1_i-1], dp[s1_i-1][s2_i][1] + 1)
                     elif dp[s1_i][s2_i-1][0] >= 0 and dp[s1_i][s2_i-1][0] + s2[s2_i-1] <= maxSum:
                         dp[s1_i][s2_i] = (dp[s1_i][s2_i-1][0] + s2[s2_i-1], dp[s1_i][s2_i-1][1] + 1)
-
+            # print("dp")
             # for row in dp:
             #     print(row)
-            for s1_i in range(1, len(s1)+1):
-                for s2_i in range(2, len(s2)+1):
-                    if dp[s1_i][s2_i][0] != -1:
-                        biggestCount = max(biggestCount, dp[s1_i][s2_i][1])
+            for s1_i in range(len(s1)+1):
+                for s2_i in range(len(s2)+1):
+                    #if dp[s1_i][s2_i][0] != -1:
+                    biggestCount = max(biggestCount, dp[s1_i][s2_i][1])
             
             ans.append(biggestCount)
             
@@ -66,7 +66,13 @@ class PortfolioOperations():
 #                 "3 7 3696",
 #                 "12 21 102",
 #                 "167 244 377 56 235 269 23"
-#             ]]
+#             ],
+#             [
+#                 "19 3 1005",
+#                 "32 34 85 54 32 72 154 48 5 8 138 177 78 138 19 196 137 155 114",
+#                 "45 282 172"
+#             ]],
+            
 # }
 # po = PortfolioOperations()
 # print(po.answer(tc))
