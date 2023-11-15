@@ -6,6 +6,7 @@ from modules.CoinChange import CoinChange
 from modules.FileReorganization import FileReorganization
 from modules.TimeIntervals import TimeIntervals
 from modules.PortfolioOperations import PortfolioOperations
+from modules.DataEncryption import DataEncryption
 
 app = Flask(__name__)
 
@@ -15,6 +16,7 @@ coinChangeModule = CoinChange()
 fr = FileReorganization()
 ti = TimeIntervals()
 po = PortfolioOperations()
+de = DataEncryption()
 
 @app.route('/')
 def hello_world():
@@ -58,3 +60,8 @@ def TimeIntervals():
 def PortfolioOperations():
     data = request.get_json()
     return po.answer(data)
+
+@app.route('/data-encryption', methods = ['POST'])
+def DataEncryption():
+    data = request.get_json()
+    return de.answer(data)
