@@ -8,6 +8,7 @@ from modules.TimeIntervals import TimeIntervals
 from modules.PortfolioOperations import PortfolioOperations
 from modules.DataEncryption import DataEncryption
 from modules.RiskMitigation import RiskMitigation
+from modules.ProfitMaximization import ProfitMaximization
 
 app = Flask(__name__)
 
@@ -19,6 +20,7 @@ ti = TimeIntervals()
 po = PortfolioOperations()
 de = DataEncryption()
 rm = RiskMitigation()
+pm = ProfitMaximization()
 
 @app.route('/')
 def hello_world():
@@ -72,3 +74,8 @@ def DataEncryption():
 def RiskMitigation():
     data = request.get_json()
     return rm.answer(data)
+
+@app.route('/profit-maximization', methods = ['POST'])
+def ProfitMaximization():
+    data = request.get_json()
+    return pm.answer(data)
