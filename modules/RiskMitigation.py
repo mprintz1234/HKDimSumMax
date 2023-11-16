@@ -25,9 +25,7 @@ class RiskMitigation():
 
             if start != end:
                 increasing.append([start, end, costs[end] - costs[start]])
-            print()
             while len(increasing) > n:
-                print(increasing)
                 loss = increasing[0][2]
                 loss_i = 0
 

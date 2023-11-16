@@ -9,7 +9,7 @@ from modules.PortfolioOperations import PortfolioOperations
 from modules.DataEncryption import DataEncryption
 from modules.RiskMitigation import RiskMitigation
 from modules.ProfitMaximization import ProfitMaximization
-from modules.MLMM import MLMM
+from modules.mlmm import MLMM
 
 app = Flask(__name__)
 
