@@ -7,6 +7,7 @@ from modules.FileReorganization import FileReorganization
 from modules.TimeIntervals import TimeIntervals
 from modules.PortfolioOperations import PortfolioOperations
 from modules.DataEncryption import DataEncryption
+from modules.RiskMitigation import RiskMitigation
 
 app = Flask(__name__)
 
@@ -17,6 +18,7 @@ fr = FileReorganization()
 ti = TimeIntervals()
 po = PortfolioOperations()
 de = DataEncryption()
+rm = RiskMitigation()
 
 @app.route('/')
 def hello_world():
@@ -65,3 +67,8 @@ def PortfolioOperations():
 def DataEncryption():
     data = request.get_json()
     return de.answer(data)
+
+@app.route('/risk-mitigation', methods = ['POST'])
+def RiskMitigation():
+    data = request.get_json()
+    return rm.answer(data)
