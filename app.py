@@ -9,6 +9,7 @@ from modules.PortfolioOperations import PortfolioOperations
 from modules.DataEncryption import DataEncryption
 from modules.RiskMitigation import RiskMitigation
 from modules.ProfitMaximization import ProfitMaximization
+from modules.MLMM import MLMM
 
 app = Flask(__name__)
 
@@ -21,6 +22,7 @@ po = PortfolioOperations()
 de = DataEncryption()
 rm = RiskMitigation()
 pm = ProfitMaximization()
+mlmm = MLMM()
 
 @app.route('/')
 def hello_world():
@@ -79,3 +81,8 @@ def RiskMitigation():
 def ProfitMaximization():
     data = request.get_json()
     return pm.answer(data)
+
+@app.route('/mlmm-program', methods = ['POST'])
+def MLMM():
+    data = request.get_json()
+    return mlmm.answer(data)
