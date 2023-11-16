@@ -13,14 +13,14 @@ class RiskMitigation():
             increasing = []
 
             for i in range(1, len(costs)):
-                if costs[i] <= costs[i-1] and start==end:
+                if costs[i] < costs[i-1] and start==end:
                     start += 1
                     end += 1
-                elif costs[i] <= costs[i-1] and start!= end:
+                elif costs[i] < costs[i-1] and start!= end:
                     increasing.append([start, end, costs[end] - costs[start]])
                     start = i
                     end = i
-                elif costs[i] > costs[i-1]:
+                elif costs[i] >= costs[i-1]:
                     end = i
 
             if start != end:
@@ -42,11 +42,13 @@ class RiskMitigation():
                 if loss_i == 0:
                     increasing = increasing[1:]
                 else:
-                    if costs[increasing[i][1]] > costs[increasing[i-1][1]]:
+                    #print(costs[increasing[loss_i][1]], increasing[loss_i][1], costs[increasing[loss_i-1][1]], increasing[loss_i-1][1])
+                    if costs[increasing[loss_i][1]] > costs[increasing[loss_i-1][1]]:
                         increasing[loss_i-1][1] = increasing[loss_i][1]
                         increasing[loss_i-1][2] = costs[increasing[loss_i-1][1]] - costs[increasing[loss_i-1][0]]
                     increasing = increasing[:loss_i] + increasing[loss_i+1:]
 
+            #print(increasing)
             total = 0
             for i in range(len(increasing)):
                 total += increasing[i][2]
@@ -54,19 +56,19 @@ class RiskMitigation():
         
         return {"answer": ans_lst}
 
-tc = {
-  "inputs": [[
-                "2 3",
-                "2 4 1"
-            ],
-            [
-                "2 11",
-                "3 2 6 5 0 3 5 4 3 1 6"
-            ],
-            [
-                "2 20",
-                "7 7 8 6 1 6 4 2 7 1 6 5 7 7 8 2 3 7 2 3"
-            ]]
-}
-rm = RiskMitigation()
-print(rm.answer(tc))
+# tc = {
+#   "inputs": [[
+#                 "2 3",
+#                 "2 4 1"
+#             ],
+#             [
+#                 "2 11",
+#                 "3 2 6 5 0 3 5 4 3 1 6"
+#             ],
+#             [
+#                 "2 20",
+#                 "7 7 8 6 1 6 4 2 7 1 6 5 7 7 8 2 3 7 2 3"
+#             ]]
+# }
+# rm = RiskMitigation()
+# print(rm.answer(tc))
