@@ -25,8 +25,9 @@ class RiskMitigation():
 
             if start != end:
                 increasing.append([start, end, costs[end] - costs[start]])
-
+            print()
             while len(increasing) > n:
+                print(increasing)
                 loss = increasing[0][2]
                 loss_i = 0
 
@@ -43,6 +44,7 @@ class RiskMitigation():
                 else:
                     if costs[increasing[i][1]] > costs[increasing[i-1][1]]:
                         increasing[loss_i-1][1] = increasing[loss_i][1]
+                        increasing[loss_i-1][2] = costs[increasing[loss_i-1][1]] - costs[increasing[loss_i-1][0]]
                     increasing = increasing[:loss_i] + increasing[loss_i+1:]
 
             total = 0
@@ -60,6 +62,10 @@ tc = {
             [
                 "2 11",
                 "3 2 6 5 0 3 5 4 3 1 6"
+            ],
+            [
+                "2 20",
+                "7 7 8 6 1 6 4 2 7 1 6 5 7 7 8 2 3 7 2 3"
             ]]
 }
 rm = RiskMitigation()
