@@ -20,8 +20,14 @@ class Fraud():
 
                 s = []
                 s.append(sender)
+                lookup_set = set()
                 while s:
                     curr = s.pop()
+                    if curr in lookup_set:
+                        continue
+                    else:
+                        lookup_set.add(curr)
+
                     if curr == receiver:
                         eligible = False
                         break
