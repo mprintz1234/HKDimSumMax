@@ -10,6 +10,7 @@ from modules.DataEncryption import DataEncryption
 from modules.RiskMitigation import RiskMitigation
 from modules.ProfitMaximization import ProfitMaximization
 from modules.mlmm import MLMM
+from modules.FraudulentTransactions import Fraud
 
 app = Flask(__name__)
 
@@ -23,6 +24,7 @@ de = DataEncryption()
 rm = RiskMitigation()
 pm = ProfitMaximization()
 mlmm = MLMM()
+ft = FraudulentTransactions()
 
 @app.route('/')
 def hello_world():
@@ -86,3 +88,8 @@ def ProfitMaximization():
 def MLMM():
     data = request.get_json()
     return mlmm.answer(data)
+
+@app.route('/fraudulent-transactions', methods = ['POST'])
+def Fraud():
+    data = request.get_json()
+    return ft.answer(data)
