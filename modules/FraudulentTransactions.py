@@ -16,14 +16,26 @@ class Fraud():
                 receiver = testcase[i].split()[1]
                 if sender == receiver:
                     continue
-                history = transfers[sender]
+                #history = transfers[sender]
 
-                if receiver in history:
-                    eligible = False
-                    break
-                else:
-                    transfers[receiver].update(history)
-                    transfers[receiver].add(sender)
+                s = []
+                s.append(sender)
+                while s:
+                    curr = s.pop()
+                    if curr == receiver:
+                        eligible = False
+                        break
+                    else:
+                        for p in transfers[curr]:
+                            s.append(p)
+
+                transfers[receiver].add(sender)
+                # if receiver in history:
+                #     eligible = False
+                #     break
+                # else:
+                #     transfers[receiver].add(sender)
+                #     #transfers[receiver].add(sender)
                 # print(sender, receiver, transfers)
 
             # print()
@@ -46,6 +58,8 @@ class Fraud():
 #                 "3 2",
 #                 "0 1",
 #                 "1 1"
+#             ],[
+#                 "7 8","0 5","6 4","6 2","2 0","4 1","5 3","2 1","3 2"
 #             ]]
 # }
 # ft = Fraud()
