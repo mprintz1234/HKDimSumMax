@@ -24,7 +24,7 @@ de = DataEncryption()
 rm = RiskMitigation()
 pm = ProfitMaximization()
 mlmm = MLMM()
-ft = FraudulentTransactions()
+ft = Fraud()
 
 @app.route('/')
 def hello_world():
